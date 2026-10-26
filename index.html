@@ -244,4 +244,164 @@
         </tr>
         <tr>
             <td>
-                <b>Evento o Preventivo N°</b> <input type="text" class="input-field" id="evento" value="26ZE61UC09072" style="width:
+                <b>Evento o Preventivo N°</b> <input type="text" class="input-field" id="evento" value="26ZE61UC09072" style="width: 45%;">
+            </td>
+            <td>
+                <b>del</b> <input type="text" class="input-field" id="del" value="" style="width: 20%;"> &nbsp;&nbsp;
+                <b>Bollato</b> <input type="text" class="input-field" id="bollato" value="26ZE61UC09072" style="width: 40%;">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>Via</b> &nbsp; <input type="text" class="input-field" id="via" value="VIA MONTE MALOIA 4" style="width: 90%;">
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td width="40%"><b>Cabina Primaria</b> <input type="text" class="input-field" id="cp" style="width: 50%;"></td>
+            <td width="35%"><b>Linea</b> <input type="text" class="input-field" id="linea" style="width: 60%;"></td>
+            <td width="25%"><b>C.S.</b> <input type="text" class="input-field" id="cs" style="width: 60%;"></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <b>Tratto &nbsp;&nbsp; da Cabina Secondaria</b> <input type="text" class="input-field" id="da_cs" style="width: 30%;">
+                &nbsp;&nbsp;&nbsp;&nbsp; <b>a Cabina Secondaria</b> <input type="text" class="input-field" id="a_cs" style="width: 30%;">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <b>Giuntista/i impresa</b> &nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="input-field" id="giuntista" value="LEONARDO MANDARA" style="width: 65%;">
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td width="28%"><u><b>nuovo accessorio</b></u></td>
+            <td width="28%"><span class="sq-check" onclick="toggleCheck(this)"></span> termorestringente</td>
+            <td width="24%"><span class="sq-check" onclick="toggleCheck(this)"></span> giunto 24kV</td>
+            <td rowspan="4" width="20%" style="vertical-align: top;">
+                <b>fornitore</b> <input type="text" class="input-field" id="fornitore" style="width: 90%;"><br><br>
+                <b>cod. SAP</b> &nbsp; <input type="text" class="input-field" id="sap" value="1217277" style="width: 50%; font-weight: bold;">
+            </td>
+        </tr>
+        <tr>
+            <td><span class="sq-check" onclick="toggleCheck(this)">X</span> <b>giunto</b></td>
+            <td><span class="sq-check" onclick="toggleCheck(this)"></span> autorestringente</td>
+            <td><span class="sq-check" onclick="toggleCheck(this)"></span> giunto 36kV</td>
+        </tr>
+        <tr>
+            <td><span class="sq-check" onclick="toggleCheck(this)"></span> <b>terminale</b></td>
+            <td><span class="sq-check" onclick="toggleCheck(this)"></span> sconnettibile</td>
+            <td><span class="sq-check" onclick="toggleCheck(this)"></span> giunto riparazione 24 kV</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><span class="sq-check" onclick="toggleCheck(this)"></span> giunto riparazione 36 kV</td>
+        </tr>
+    </table>
+
+    <div class="double-header-box">
+        <i>Rilievi propedeutici alla consegna dell'impianto, o all'autorizzazione del tecnico areti che gestisce il lavoro<br>
+        (la Consegna Impianto o l'autorizzazione sarà effettuata solo se i seguenti parametri risultano tutti regolari)</i>
+    </div>
+
+    <table>
+        <tr>
+            <td><u><b>Qualifica Giuntista</b></u> <i>(rilevabile dal tesserino con foto rilasciato da ACEA)</i></td>
+            <td width="8%" style="text-align:center;"><span class="sq-check" onclick="toggleCheck(this)">X</span></td>
+            <td width="8%" style="text-align:center;"><span class="sq-check">NO</span></td>
+        </tr>
+        <tr>
+            <td><u><b>Attrezzatura idonea</b></u></td>
+            <td style="text-align:center;"><span class="sq-check" onclick="toggleCheck(this)">X</span></td>
+            <td style="text-align:center;"><span class="sq-check">NO</span></td>
+        </tr>
+        <tr>
+            <td><u><b>Integrità confezione del giunto e congruità</b></u> &nbsp; <b>(1)</b></td>
+            <td style="text-align:center;"><span class="sq-check" onclick="toggleCheck(this)">X</span></td>
+            <td style="text-align:center;"><span class="sq-check">NO</span></td>
+        </tr>
+        <tr>
+            <td><u><b>Corrette condizioni ambientali</b></u> <i>(idoneità buca ~3X1, telo plastica, tenda se necessaria, ecc...)</i></td>
+            <td style="text-align:center;"><span class="sq-check" onclick="toggleCheck(this)">X</span></td>
+            <td style="text-align:center;"><span class="sq-check">NO</span></td>
+        </tr>
+        <tr>
+            <td><u><b>Possesso targa giunto da apporre dopo il confezionamento</b></u></td>
+            <td style="text-align:center;"><span class="sq-check" onclick="toggleCheck(this)">X</span></td>
+            <td style="text-align:center;"><span class="sq-check">NO</span></td>
+        </tr>
+    </table>
+
+    <div style="font-size: 7.5px; margin: 4px 0 5px 0; line-height: 1.25;">
+        <b>(1) - Nominativo del Tecnico dispacciato che, <u>in emergenza per la rialimentazione di utenze</u>, autorizza l'esecuzione dell'accessorio con materiale non conforme all'unificazione e che provvederà, <u>prima del ripristino dello scavo</u>, a farlo <u>rimuovere e realizzarlo con materiale unificato</u></b> ....................................................................................................................................................................................
+    </div>
+
+    <div class="double-header-box">
+        REPERTAZIONE ACCESSORIO GUASTO<br>
+        <span style="font-weight: normal; font-size: 8px;">(solo giunti confezionati da meno di 3 anni e non danneggiati da terzi)</span>
+    </div>
+
+    <table>
+        <tr>
+            <td colspan="2">
+                <b>Presenza targa identificativa</b> (da allegare al presente modello) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="sq-check" onclick="toggleCheck(this)">SI</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                <span class="sq-check" onclick="toggleCheck(this)">NO</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <b>Eventuali segni visibili all'atto della rimozione</b><br>
+                <i>(schiacciamento, materiale di riempimento non idoneo, danneggiamento, ecc...)</i> &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="input-field" id="segni" style="width: 50%;">
+            </td>
+        </tr>
+    </table>
+
+    <div class="double-header-box" style="font-weight: normal; font-size: 8px; margin-top: -1px;">
+        In caso di assenza di targhetta identificativa, i seguenti dati devono essere reperiti dal tecnico che effettua la contabilità del nuovo accessorio
+    </div>
+
+    <table>
+        <tr>
+            <td width="55%"><b>Impresa esecutrice</b> <input type="text" class="input-field" id="imp_es" style="width: 70%;"></td>
+            <td width="45%"><b>N° Contratto</b> <input type="text" class="input-field" id="num_cont" style="width: 65%;"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><b>Esecutore accessorio guasto</b> <input type="text" class="input-field" id="esec_g" style="width: 70%;"></td>
+        </tr>
+    </table>
+
+    <table class="signatures-table">
+        <tr>
+            <td width="50%">
+                Firma del Responsabile della Direzione lavori<br><br>
+                __________________________________________________
+            </td>
+            <td width="50%">
+                Firma del Preposto areti /Tecnico che gestisce il lavoro<br><br>
+                __________________________________________________
+            </td>
+        </tr>
+    </table>
+
+    <div class="footer-page-num">scheda giunti 1 di 2</div>
+</div>
+
+<script>
+    function toggleCheck(el) {
+        if (el.innerText === 'X') {
+            el.innerText = '';
+        } else if (el.innerText === '') {
+            el.innerText = 'X';
+        }
+    }
+</script>
+
+</body>
+</html>
