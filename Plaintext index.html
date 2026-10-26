@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheda Dati Giunti MT - Compilazione Rapida</title>
+    <style>
+        :root {
+            --primary-color: #0A2540;
+            --secondary-color: #635BFF;
+            --bg-color: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --border-color: #CBD5E0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #1A202C;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .form-pane {
+            width: 45%;
+            padding: 24px;
+            overflow-y: auto;
+            background: var(--card-bg);
+            border-right: 1px solid var(--border-color);
+        }
+
+        .preview-pane {
+            width: 55%;
+            padding: 24px;
+            background: #4A5568;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+
+        .highlight-box {
+            background: #FEFCBF;
+            border: 1px solid #D69E2E;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .highlight-box h3 {
+            font-size: 0.9rem;
+            color: #744210;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        label {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #4A5568;
+            text-transform: uppercase;
+        }
+
+        input[type="text"], input[type="date"], select {
+            padding: 8px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .btn-print {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-print:hover {
+            background: #081B30;
+        }
+
+        /* Document Render Layout */
+        .document-page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-size: 10px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .doc-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        .doc-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 6px 0 12px 0;
+        }
+
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+        }
+
+        .doc-table th, .doc-table td {
+            border: 1px solid #000;
+            padding: 4px 6px;
+            font-size: 9.5px;
+        }
+
+        .doc-table th {
+            background: #f0f0f0;
+        }
+
+        .check-box {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 10px;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .sig-box {
+            width: 45%;
+            text-align: center;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid #000;
+            margin-top: 35px;
+        }
+
+        @media print {
+            .form-pane { display: none !important; }
+            .preview-pane { width: 100% !important; background: white !important; padding: 0 !important; }
+            .document-page { box-shadow: none !important; width: 100% !important; padding: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Form Side -->
+    <div class="form-pane">
+        <h2>Scheda Giunti MT (areti)</h2>
+        
+        <!-- Primary Required Inputs -->
+        <div class="highlight-box">
+            <h3>Campi Principali da Compilare</h3>
+            <div class="form-group">
+                <label>Bollato Via (Indirizzo Intervento)</label>
+                <input type="text" id="bollatoVia" placeholder="es. Via Flaminia, 45" oninput="updatePreview()">
+            </div>
+            <div class="form-group">
+                <label>N° Contratto</label>
+                <input type="text" id="contratto" placeholder="es. 36/1234" oninput="updatePreview()">
+            </div>
+            <div class="form-group">
+                <label>Nome e Cognome Giuntista</label>
+                <input type="text" id="giuntista" placeholder="es. Mario Rossi" oninput="updatePreview()">
+            </div>
+            <div class="form-group">
+                <label>Codice SAP (Precompilato)</label>
+                <input type="text" id="codSap" value="1217277" readonly style="background:#edf2f7; font-weight:bold;">
+            </div>
+        </div>
+
+        <!-- Secondary Fields -->
+        <div class="form-group">
+            <label>Impresa Esecutrice</label>
+            <input type="text" id="impresa" value="Selind SRL" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+            <label>Giorno Intervento</label>
+            <input type="date" id="giorno" onchange="updatePreview()">
+        </div>
+        <div class="form-group">
+            <label>Tipologia Accessorio</label>
+            <select id="tensione" onchange="updatePreview()">
+                <option value="giunto 24kV" selected>Giunto 24 kV</option>
+                <option value="giunto 36kV">Giunto 36 kV</option>
+                <option value="giunto riparazione 24 kV">Giunto Riparazione 24 kV</option>
+                <option value="giunto riparazione 36 kV">Giunto Riparazione 36 kV</option>
+                <option value="terminale">Terminale</option>
+            </select>
+        </div>
+
+        <button class="btn-print" onclick="window.print()">Stampa / Salva in PDF</button>
+    </div>
+
+    <!-- Preview Side -->
+    <div class="preview-pane">
+        <div class="document-page">
+            <div class="doc-header">
+                <span>rev.2 marzo 2017</span>
+                <span>Scheda dati giunti e terminali MT</span>
+            </div>
+
+            <div class="doc-title">SCHEDA DATI GIUNTI E TERMINALI MT</div>
+
+            <table class="doc-table">
+                <tr>
+                    <td><b>Impresa:</b> <span id="p_impresa">Selind SRL</span></td>
+                    <td><b>Contratto:</b> <span id="p_contratto">36/....................</span></td>
+                </tr>
+                <tr>
+                    <td><b>Giorno:</b> <span id="p_giorno">...../...../202...</span></td>
+                    <td><b>Ore:</b> ..... : .....</td>
+                </tr>
+                <tr>
+                    <td><b>Evento / Preventivo N°:</b> ....................</td>
+                    <td><b>del:</b> ...../...../202... &nbsp;&nbsp; <b>Bollato Via:</b> <span id="p_bollatoVia">......................................</span></td>
+                </tr>
+            </table>
+
+            <div style="font-size: 8px; text-align: center; border: 1px solid #cbd5e0; padding: 4px; margin-bottom: 8px; background: #f7fafc;">
+                <b>Per interventi con PdL:</b> a cura del Preposto areti che deve effettuare la Consegna Impianto<br>
+                <b>Per interventi privi di PdL:</b> a cura del tecnico areti che gestisce il lavoro dell'impresa
+            </div>
+
+            <div style="font-weight: bold; background: #edf2f7; padding: 3px; border: 1px solid #000; margin-bottom: 4px;">1. UBICAZIONE E TIPOLOGIA ACCESSORIO</div>
+            <table class="doc-table">
+                <tr>
+                    <td><b>Cabina Primaria (CP):</b> ....................................</td>
+                    <td><b>Linea:</b> ....................................</td>
+                </tr>
+                <tr>
+                    <td><b>Tratto da Cabina Sec. (CS):</b> ............................</td>
+                    <td><b>a Cabina Sec. (CS):</b> ............................</td>
+                </tr>
+                <tr>
+                    <td><b>Giuntista/i Impresa:</b> <span id="p_giuntista">...................................................</span></td>
+                    <td><b>C.S.:</b> ....................</td>
+                </tr>
+            </table>
+
+            <table class="doc-table">
+                <tr>
+                    <td><span class="check-box" id="chk_nuovo"></span> nuovo accessorio</td>
+                    <td><span class="check-box" id="chk_termo"></span> termorestringente</td>
+                    <td><span class="check-box" id="chk_j24">X</span> giunto 24 kV</td>
+                </tr>
+                <tr>
+                    <td><span class="check-box" id="chk_giunto">X</span> giunto</td>
+                    <td><span class="check-box" id="chk_auto">X</span> autorestringente</td>
+                    <td><span class="check-box" id="chk_j36"></span> giunto 36 kV</td>
+                </tr>
+                <tr>
+                    <td><span class="check-box" id="chk_term"></span> terminale</td>
+                    <td><span class="check-box" id="chk_sconn"></span> sconnettibile</td>
+                    <td><span class="check-box" id="chk_jrip24"></span> giunto riparazione 24 kV</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><span class="check-box" id="chk_jrip36"></span> giunto riparazione 36 kV</td>
+                </tr>
+            </table>
+
+            <table class="doc-table">
+                <tr>
+                    <td><b>Fornitore:</b> ...........................................................</td>
+                    <td><b>Codice SAP:</b> <b>1217277</b></td>
+                </tr>
+            </table>
+
+            <div style="font-weight: bold; background: #edf2f7; padding: 3px; border: 1px solid #000; margin-bottom: 4px;">2. RILIEVI PROPEDEUTICI ALLA CONSEGNA IMPIANTO</div>
+            <table class="doc-table">
+                <tr>
+                    <th>Parametro di Controllo</th>
+                    <th width="12%" style="text-align:center;">SI</th>
+                    <th width="12%" style="text-align:center;">NO</th>
+                </tr>
+                <tr>
+                    <td>Qualifica Giuntista (tesserino con foto ACEA)</td>
+                    <td style="text-align:center;"><span class="check-box">X</span></td>
+                    <td style="text-align:center;"></td>
+                </tr>
+                <tr>
+                    <td>Attrezzatura idonea</td>
+                    <td style="text-align:center;"><span class="check-box">X</span></td>
+                    <td style="text-align:center;"></td>
+                </tr>
+                <tr>
+                    <td>Integrità confezione del giunto e congruità</td>
+                    <td style="text-align:center;"><span class="check-box">X</span></td>
+                    <td style="text-align:center;"></td>
+                </tr>
+                <tr>
+                    <td>Corrette condizioni ambientali (idoneità buca ~3X1, telo, tenda)</td>
+                    <td style="text-align:center;"><span class="check-box">X</span></td>
+                    <td style="text-align:center;"></td>
+                </tr>
+                <tr>
+                    <td>Possesso targa giunto da apporre dopo il confezionamento</td>
+                    <td style="text-align:center;"><span class="check-box">X</span></td>
+                    <td style="text-align:center;"></td>
+                </tr>
+            </table>
+
+            <div style="font-weight: bold; background: #edf2f7; padding: 3px; border: 1px solid #000; margin-top: 8px; margin-bottom: 4px;">3. REPERTAZIONE ACCESSORIO GUASTO</div>
+            <table class="doc-table">
+                <tr>
+                    <td><b>Presenza targa identificativa:</b> &nbsp;&nbsp; SI <span class="check-box"></span> &nbsp;&nbsp;&nbsp; NO <span class="check-box">X</span></td>
+                </tr>
+                <tr>
+                    <td><b>Eventuali segni visibili all'atto della rimozione:</b><br>..............................................................................................................................</td>
+                </tr>
+                <tr>
+                    <td><b>Impresa esecutrice orig.:</b> .................................... &nbsp;&nbsp;&nbsp;&nbsp; <b>N° Contratto:</b> ....................</td>
+                </tr>
+                <tr>
+                    <td><b>Esecutore accessorio guasto:</b> ....................................................................................................</td>
+                </tr>
+            </table>
+
+            <div class="signatures">
+                <div class="sig-box">
+                    <div>Firma Responsabile Direzione Lavori</div>
+                    <div class="sig-line"></div>
+                </div>
+                <div class="sig-box">
+                    <div>Firma Preposto areti / Tecnico</div>
+                    <div class="sig-line"></div>
+                </div>
+            </div>
+
+            <div style="position: absolute; bottom: 10mm; right: 15mm; font-size: 8px; color: #555;">
+                scheda giunti 1 di 2
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function updatePreview() {
+        document.getElementById('p_impresa').innerText = document.getElementById('impresa').value || 'Selind SRL';
+        document.getElementById('p_contratto').innerText = document.getElementById('contratto').value || '36/....................';
+        document.getElementById('p_bollatoVia').innerText = document.getElementById('bollatoVia').value || '......................................';
+        document.getElementById('p_giuntista').innerText = document.getElementById('giuntista').value || '...................................................';
+        
+        const giornoVal = document.getElementById('giorno').value;
+        if(giornoVal) {
+            const parts = giornoVal.split('-');
+            document.getElementById('p_giorno').innerText = `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+
+        const tens = document.getElementById('tensione').value;
+        document.getElementById('chk_j24').innerText = (tens === 'giunto 24kV') ? 'X' : '';
+        document.getElementById('chk_j36').innerText = (tens === 'giunto 36kV') ? 'X' : '';
+        document.getElementById('chk_jrip24').innerText = (tens === 'giunto riparazione 24 kV') ? 'X' : '';
+        document.getElementById('chk_jrip36').innerText = (tens === 'giunto riparazione 36 kV') ? 'X' : '';
+        document.getElementById('chk_term').innerText = (tens === 'terminale') ? 'X' : '';
+    }
+</script>
+
+</body>
+</html>
