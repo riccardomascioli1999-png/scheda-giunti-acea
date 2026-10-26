@@ -72,11 +72,13 @@
 
         .logo-area {
             width: 55%;
-            padding-top: 5px;
+            padding-top: 2px;
         }
 
-        .logo-svg {
-            height: 38px;
+        .logo-img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
         }
 
         .pdl-box {
@@ -198,11 +200,26 @@
 
     <div class="top-row">
         <div class="logo-area">
-            <!-- LOGO ARETI VETTORIALE FEDELE -->
-            <svg class="logo-svg" viewBox="0 0 160 45" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 22 10 C 12 10 5 18 5 27 C 5 35 12 40 22 40 C 30 40 36 34 37 26 L 31 26 C 30 30 26 34 22 34 C 16 34 12 29 12 24 C 12 18 16 14 22 14 C 27 14 30 17 31 21 L 37 21 C 35 14 29 10 22 10 Z" fill="#E30613"/>
-                <circle cx="24" cy="24" r="5" fill="#E30613"/>
-                <text x="44" y="34" font-family="Arial, sans-serif" font-size="28" font-weight="bold" font-style="italic" fill="#E30613">areti</text>
+            <!-- LOGO ARETI INTEGRATO FEDELE -->
+            <svg class="logo-img" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="g_pink" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#E51A93"/>
+                        <stop offset="60%" stop-color="#DF1E6A"/>
+                        <stop offset="100%" stop-color="#F37023"/>
+                    </linearGradient>
+                    <linearGradient id="g_blue" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0083CA"/>
+                        <stop offset="100%" stop-color="#00A896"/>
+                    </linearGradient>
+                </defs>
+                <!-- Ovale sfumato inferiore (azzurro) -->
+                <path d="M 25 38 C 15 38 12 48 24 54 C 40 62 75 50 72 38 C 70 30 40 38 25 38 Z" fill="url(#g_blue)"/>
+                <!-- Nastri superiori (rosa/arancio sfumato) -->
+                <path d="M 24 15 C 38 5 70 12 76 30 C 82 48 70 58 54 60 C 72 56 80 40 70 26 C 60 10 32 8 24 15 Z" fill="url(#g_pink)"/>
+                <path d="M 18 24 C 30 10 65 14 74 28 C 66 18 36 15 24 28 C 16 36 30 52 50 56 C 30 54 12 40 18 24 Z" fill="#E51A93"/>
+                <!-- Scritta a r e t i -->
+                <text x="92" y="47" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#B01268" letter-spacing="7">areti</text>
             </svg>
         </div>
         <div class="pdl-box">
@@ -331,7 +348,7 @@
     </table>
 
     <div style="font-size: 7.5px; margin: 4px 0 6px 0; line-height: 1.25;">
-        <b>(1) - Nominativo del Tecnico dispacciato che, <u>in emergenza per la rialimentazione di utenze</u>, autorizza l'esecuzione dell'accessorio con material non conforme all'unificazione e che provvederà, <u>prima del ripristino dello scavo</u>, a farlo <u>rimuovere e realizzarlo con materiale unificato</u></b> ....................................................................................................................................................................................
+        <b>(1) - Nominativo del Tecnico dispacciato che, <u>in emergenza per la rialimentazione di utenze</u>, autorizza l'esecuzione dell'accessorio con materiale non conforme all'unificazione e che provvederà, <u>prima del ripristino dello scavo</u>, a farlo <u>rimuovere e realizzarlo con materiale unificato</u></b> ....................................................................................................................................................................................
     </div>
 
     <!-- SEZIONE REPERTAZIONE ACCESSORIO GUASTO -->
