@@ -7,17 +7,21 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
             color: #000000;
         }
 
         body {
-            background-color: #525659;
+            background-color: #33373a;
             margin: 0;
             padding: 20px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
         .no-print-bar {
@@ -26,7 +30,7 @@
             padding: 12px 20px;
             margin-bottom: 15px;
             border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,62 +49,54 @@
 
         .btn-print:hover { background-color: #005a9e; }
 
-        /* FOGLIO A4 CON DIMENSIONI E MARGINI REALI WORD */
         .page-a4 {
             width: 210mm;
-            height: 297mm;
-            padding: 10mm 12mm 10mm 12mm;
+            min-height: 297mm;
+            padding: 8mm 12mm 8mm 12mm;
             background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
             position: relative;
-            overflow: hidden;
+            box-sizing: border-box;
         }
 
         .rev-header {
             text-align: right;
-            font-size: 9.5px;
+            font-size: 9px;
             font-weight: bold;
             margin-bottom: 2px;
         }
 
-        /* HEADER CON LOGO E BOX PDL */
         .top-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            margin-bottom: 4px;
         }
 
         .logo-area {
-            width: 55%;
-            padding-top: 2px;
-        }
-
-        .logo-img {
-            height: 48px;
-            width: auto;
-            object-fit: contain;
+            width: 50%;
+            padding-top: 4px;
         }
 
         .pdl-box {
-            width: 220px;
+            width: 240px;
             border: 1px solid #000;
-            padding: 5px;
+            padding: 6px;
             font-size: 8px;
             text-align: center;
-            line-height: 1.2;
+            line-height: 1.25;
             background: #fff;
         }
 
         .doc-title {
             text-align: center;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             font-style: italic;
             text-decoration: underline;
-            margin: 8px 0 12px 0;
+            margin: 6px 0 10px 0;
         }
 
-        /* TABELLE ED ELEMENTI GRAFICI */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -111,19 +107,19 @@
         td, th {
             border: 1px solid #000000;
             padding: 3px 5px;
-            font-size: 9.5px;
+            font-size: 9px;
             vertical-align: middle;
             word-wrap: break-word;
         }
 
         .input-field {
             border: none;
-            border-bottom: 1px dotted #444;
+            border-bottom: 1px dotted #333;
             outline: none;
-            font-size: 10px;
+            font-size: 9.5px;
             font-weight: bold;
             background: transparent;
-            padding: 0 3px;
+            padding: 0 2px;
         }
 
         .input-field:focus {
@@ -133,12 +129,12 @@
 
         .sq-check {
             display: inline-block;
-            width: 20px;
-            height: 15px;
+            width: 18px;
+            height: 14px;
             border: 1px solid #000;
             text-align: center;
-            line-height: 14px;
-            font-size: 11px;
+            line-height: 13px;
+            font-size: 10px;
             font-weight: bold;
             background: #fff;
             cursor: pointer;
@@ -150,14 +146,14 @@
             text-align: center;
             padding: 4px;
             font-weight: bold;
-            font-size: 9px;
-            margin-top: 6px;
+            font-size: 8.5px;
+            margin-top: 5px;
             line-height: 1.2;
         }
 
         .signatures-table {
             width: 100%;
-            margin-top: 25px;
+            margin-top: 15px;
             border-collapse: collapse;
         }
 
@@ -167,12 +163,12 @@
             font-size: 8.5px;
             font-weight: bold;
             vertical-align: top;
-            padding-top: 20px;
+            padding-top: 15px;
         }
 
         .footer-page-num {
             position: absolute;
-            bottom: 6mm;
+            bottom: 5mm;
             right: 12mm;
             font-size: 8px;
         }
@@ -180,7 +176,7 @@
         @media print {
             body { background: white !important; padding: 0 !important; }
             .no-print-bar { display: none !important; }
-            .page-a4 { box-shadow: none !important; width: 100% !important; height: 100% !important; padding: 5mm 10mm !important; }
+            .page-a4 { box-shadow: none !important; width: 100% !important; height: 100% !important; padding: 4mm 10mm !important; }
             .input-field { border-bottom: none !important; }
         }
     </style>
@@ -190,7 +186,7 @@
 <div class="no-print-bar">
     <div>
         <b style="color: #0078d4;">SCHEDA GIUNTI MT (areti)</b><br>
-        <span style="font-size: 12px; color: #555;">Compila direttamente nel foglio A4 qui sotto e clicca per stampare o salvare in PDF.</span>
+        <span style="font-size: 12px; color: #555;">Modulo interattivo A4 fedele al documento originale.</span>
     </div>
     <button class="btn-print" onclick="window.print()">STAMPA / SALVA PDF</button>
 </div>
@@ -200,26 +196,21 @@
 
     <div class="top-row">
         <div class="logo-area">
-            <!-- LOGO ARETI INTEGRATO FEDELE -->
-            <svg class="logo-img" viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg">
+            <svg width="180" height="50" viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="g_pink" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#E51A93"/>
-                        <stop offset="60%" stop-color="#DF1E6A"/>
+                        <stop offset="50%" stop-color="#E94E1B"/>
                         <stop offset="100%" stop-color="#F37023"/>
                     </linearGradient>
-                    <linearGradient id="g_blue" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <linearGradient id="g_cyan" x1="0%" y1="100%" x2="100%" y2="0%">
                         <stop offset="0%" stop-color="#0083CA"/>
                         <stop offset="100%" stop-color="#00A896"/>
                     </linearGradient>
                 </defs>
-                <!-- Ovale sfumato inferiore (azzurro) -->
-                <path d="M 25 38 C 15 38 12 48 24 54 C 40 62 75 50 72 38 C 70 30 40 38 25 38 Z" fill="url(#g_blue)"/>
-                <!-- Nastri superiori (rosa/arancio sfumato) -->
-                <path d="M 24 15 C 38 5 70 12 76 30 C 82 48 70 58 54 60 C 72 56 80 40 70 26 C 60 10 32 8 24 15 Z" fill="url(#g_pink)"/>
-                <path d="M 18 24 C 30 10 65 14 74 28 C 66 18 36 15 24 28 C 16 36 30 52 50 56 C 30 54 12 40 18 24 Z" fill="#E51A93"/>
-                <!-- Scritta a r e t i -->
-                <text x="92" y="47" font-family="'Segoe UI', Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#B01268" letter-spacing="7">areti</text>
+                <path d="M 12 25 C 10 35 22 46 38 43 C 54 40 68 28 58 15 C 48 2 22 8 12 25 Z" fill="none" stroke="url(#g_cyan)" stroke-width="6"/>
+                <path d="M 15 22 C 22 8 50 2 64 16 C 78 30 62 45 42 46 C 26 47 14 36 20 22 Z" fill="none" stroke="url(#g_pink)" stroke-width="6"/>
+                <text x="75" y="34" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="bold" fill="#B01268" letter-spacing="4">areti</text>
             </svg>
         </div>
         <div class="pdl-box">
@@ -232,7 +223,6 @@
 
     <div class="doc-title">Scheda dati giunti e terminali MT</div>
 
-    <!-- TABELLA DATI GENERALI -->
     <table>
         <tr>
             <td width="55%">
@@ -265,7 +255,6 @@
         </tr>
     </table>
 
-    <!-- SEZIONE CABINE E GIUNTISTA -->
     <table>
         <tr>
             <td width="40%"><b>Cabina Primaria</b> <input type="text" class="input-field" id="cp" style="width: 50%;"></td>
@@ -285,7 +274,6 @@
         </tr>
     </table>
 
-    <!-- TABELLA ACCESSORI MT CON CASELLERIA WORD -->
     <table>
         <tr>
             <td width="28%"><u><b>nuovo accessorio</b></u></td>
@@ -313,7 +301,6 @@
         </tr>
     </table>
 
-    <!-- SEZIONE RILIEVI PROPEDEUTICI -->
     <div class="double-header-box">
         <i>Rilievi propedeutici alla consegna dell'impianto, o all'autorizzazione del tecnico areti che gestisce il lavoro<br>
         (la Consegna Impianto o l'autorizzazione sarà effettuata solo se i seguenti parametri risultano tutti regolari)</i>
@@ -347,11 +334,10 @@
         </tr>
     </table>
 
-    <div style="font-size: 7.5px; margin: 4px 0 6px 0; line-height: 1.25;">
+    <div style="font-size: 7.5px; margin: 4px 0 5px 0; line-height: 1.25;">
         <b>(1) - Nominativo del Tecnico dispacciato che, <u>in emergenza per la rialimentazione di utenze</u>, autorizza l'esecuzione dell'accessorio con materiale non conforme all'unificazione e che provvederà, <u>prima del ripristino dello scavo</u>, a farlo <u>rimuovere e realizzarlo con materiale unificato</u></b> ....................................................................................................................................................................................
     </div>
 
-    <!-- SEZIONE REPERTAZIONE ACCESSORIO GUASTO -->
     <div class="double-header-box">
         REPERTAZIONE ACCESSORIO GUASTO<br>
         <span style="font-weight: normal; font-size: 8px;">(solo giunti confezionati da meno di 3 anni e non danneggiati da terzi)</span>
@@ -388,7 +374,6 @@
         </tr>
     </table>
 
-    <!-- FIRME -->
     <table class="signatures-table">
         <tr>
             <td width="50%">
